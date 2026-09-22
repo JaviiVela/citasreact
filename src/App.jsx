@@ -3,10 +3,9 @@ function App() {
 
   return (
     <>
-      <h1> Gola mundo</h1>
+      <h1> Hola mundo cruel</h1>
     </>
   );
 }
 
-export default App; 
-
+export default App;
