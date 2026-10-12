@@ -1,26 +1,50 @@
 import { useState } from "react";
 import "./css/App.css";
+import Formulario from "./components/Formulario.jsx";
+import Paciente from "./components/Paciente.jsx";
 
 function App() {
-  const [name, setName] = useState("Hola Mundo");
+  const [visible, setVisible] = useState(false);
+  const [pacientes, setPacientes] = useState([]);
+  /**
+   * Definiciones:
+   * - Para pasar un state a otro componente HIJO
+   *  debe ser mediante props
+   */
 
   return (
-    <>
-      <main className="container">
-        <h1 className="titulo">
-          Administrador de Citas Veterinario{" "}
-          <span className="titulo-bold">Veterinario</span>
-        </h1>
-        <button
-          type="button"
-          className="btn-nueva-cita"
-          onClick={() => setName("Hola javi")}
-        >
-          <span className="btn-texto-nueva-cita">Nueva Cita</span>
-        </button>
-      </main>
-    </>
+    <main className="container">
+      <h1 className="titulo">
+        Administrador de Citas <span className="titulo-bold">Veterinario</span>
+      </h1>
+      <button
+        type="button"
+        className="btn-nueva-cita"
+        onClick={() => setVisible(true)}
+      >
+        <span className="btn-texto-nueva-cita">Nueva Cita</span>
+      </button>
+
+      {pacientes.map((paciente) => (
+        <Paciente
+          setVisible={setVisible}
+          pacientes={pacientes}
+          paciente={paciente}
+        />
+      ))}
+
+      {visible && (
+        <Formulario
+          visible={visible}
+          setVisible={setVisible}
+          pacientes={pacientes}
+          setPacientes={setPacientes}
+        />
+      )}
+    </main>
   );
 }
 
 export default App;
+//un argumento es un valor que se le pasa a una funcion, y un parametro es una variable que se le pasa a una funcion, en este caso el argumento es setVisible y el parametro es setVisible
+//un parametro es una variable que se le pasa a una funcion, y un argumento es un valor que se le pasa a una funcion, en este caso el parametro es setVisible y el argumento es setVisible
